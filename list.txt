@@ -52,14 +52,14 @@ anarchisme
 Andorra
 ance
 AncienFrancais
-angelinajolie <-PSPLT
+angelinajolie
 anglais
 Angouleme
 Anishinaabewaki
 Anjou
 AnimalCrossingFrance
 Annecy
-annuaire <- VOUS ÊTES ICI
+annuaire
 annuaire_culture
 annuaire_geo
 annuaire_jeux
@@ -79,7 +79,7 @@ ArianeMasterrace
 ariege
 Arlon
 Armagh
-Armand_et_Rolande <-PSPLT
+Armand_et_Rolande
 Armes_a_feu
 arras
 arriege
@@ -116,7 +116,7 @@ aymaide_fr
 B2oba
 banalites
 bandedessinee
-barbiefrancais <-PSPLT
+barbiefrancais
 BarCraftMontreal
 BastilleSaintAntoine
 baudelaire
@@ -132,7 +132,7 @@ Belgique
 belgium
 Belgium_irl
 BelgiumPics
-belgiumgonewild <-PSPLT
+belgiumgonewild
 bellepatisserie
 Bellygareth
 Benin
@@ -145,7 +145,7 @@ Bestoffr
 BestOfFrance
 BeTech
 bethune
-beurette <-PSPLT
+beurette
 beurre_sale
 BFFR
 biarritz
@@ -223,7 +223,7 @@ cannes
 canneslions
 CannesFilmFestival
 CantonDeNeuchatel
-CapdAgde <-PSPLT
+CapdAgde
 casablanca
 casualcanada
 CasualFrance
@@ -232,7 +232,7 @@ cayenne
 CCJVQ
 CEGEP
 Celebrites
-CelebsFrance <-PSPLT
+CelebsFrance
 CelticMythology
 celts
 centreduquebec
@@ -327,7 +327,7 @@ CybSecTIA
 cyprien
 cyrano
 Dalida
-Dat_Jeff <-PSPLT
+Dat_Jeff
 DBS_Cardgame_FR
 debatdeshauts
 DebatSI24
@@ -354,7 +354,7 @@ Divertissement
 DIYeurs
 Django_france
 djibouti
-DNMFr <-PSPLT
+DNMFr
 Documentaire
 DOFUSfr
 DogecoinFrance
@@ -375,7 +375,7 @@ droits
 drolefr
 DrugsQC
 drupalfr
-dumondeaubalcon <-PSPLT
+dumondeaubalcon
 Dunkerque
 DupontDeLigonnes
 easy_french
@@ -479,7 +479,7 @@ fr_FR
 Fran
 francais
 francais_sub
-francais4francais <-PSPLT
+francais4francais
 FrancaisCanadien
 francaise
 france
@@ -493,7 +493,7 @@ france3
 FranceActu
 FranceAmericaTruCrime
 FranceBaiseOuais
-FranceBlowjobSurprise <-PSPLT
+FranceBlowjobSurprise
 francebook
 FranceBoule
 francecirclejerk
@@ -502,27 +502,27 @@ FRANCECRYPTOS
 FranceDechainee
 francedesouche
 FranceDigeste
-Francedirtyr4r <- PSPLT
+Francedirtyr4r
 FranceEnchainee
 FranceEnMono
 FranceFIRE
 Francefrog
 francefunny
 FranceGall
-FranceGW <-PSPLT
+FranceGW
 franceinfo
 FranceInsoumise
-FranceInter <-PSPLT
+FranceInter
 franceisntreal
 FranceLeBolchevik
 franceliberale
 FranceLibre
-FranceMeetic <-PSPLT
+FranceMeetic
 FranceModeration
 FranceNouvelle
-Francephotographie <-PSPLT
+Francephotographie
 FrancePics
-FranceR4R <-PSPLT
+FranceR4R
 francerouge
 FranceSucks
 FranceTranquille
@@ -539,7 +539,7 @@ frankreich
 Franse
 franseliberale
 FranseLibre
-freeusefrancais <-PSPLT
+freeusefrancais
 frejus
 French
 French_House
@@ -550,13 +550,13 @@ frenchally
 Frenchaltmusic
 FrenchCulture
 frenchelectro
-FrenchesMILFs <-PSPLT
-FrenchFilles <-PSPLT
+FrenchesMILFs
+FrenchFilles
 frenchfilms
 frenchfood
 FrenchFoods
 FrenchForeignLegion
-FrenchGoneWild <-PSPLT
+FrenchGoneWild
 frenchguiana
 FrenchGuianaPics
 frenchhelp
@@ -581,7 +581,7 @@ frenchopentennis
 frenchpatisserie
 FrenchPeopleTwitter
 frenchpolitics
-frenchpornhub <-PSPLT
+frenchpornhub
 FrenchPractice
 FrenchProblems
 FrenchPrompts
@@ -660,9 +660,9 @@ GnulinuxFR
 GoldenManager_fr
 GolfEnFrancais
 GommeBaloune
-GoneWildFR <-PSPLT
-GoneWildFrance <-PSPLT
-GoneWildQC <-PSPLT
+GoneWildFR
+GoneWildFrance
+GoneWildQC
 granby
 GrandesEnigmes
 GrandParis
@@ -683,7 +683,7 @@ GuyanaPics
 guyane
 Habs
 hailfrench
-HairySwingersMontreal <-PSPLT
+HairySwingersMontreal
 Haiti
 HamonPourPresident
 HamonPresident
@@ -722,7 +722,7 @@ interlulz
 Iphone_france
 isep
 islamophobie
-Issoutv <-PSPLT
+Issoutv
 IvoryCoast
 ivrevirgule
 jai14ansetcestprofond
@@ -734,7 +734,7 @@ jardinage
 JardinageQc
 jdr
 jememarre
-jessicaalba <-PSPLT
+jessicaalba
 JeSuisEnCPEtCestDrole
 JesuisFrensoaria
 jesuistresintelligent
@@ -862,7 +862,7 @@ LuxembourgPics
 luzern
 LyaDash
 Lyon
-LysandreNadeaux <-PLPLT
+LysandreNadeaux
 M1717_Lille
 Madagascar
 Madinina
@@ -873,7 +873,7 @@ Maghrebis
 Magog
 MakeNewFriendsFR
 maladieinfantile
-Malaise <-PSPLT
+Malaise
 malfrance
 Mali
 MaliPics
@@ -881,7 +881,7 @@ Maman
 mangafr
 mangerbouger
 mareactionquand
-MarieJo <-PSPLT
+MarieJo
 MarioFrance
 MarioMaker2FR
 maroc
@@ -969,14 +969,14 @@ MontrealEnts
 montrealfilmmakers
 MontrealFood
 Montrealfrancais
-MontrealGangbangClub <-PSPLT
+MontrealGangbangClub
 Montrealgo
-Montrealgonewild <-PSPLT
-Montrealgw <-PSPLT
+Montrealgonewild
+Montrealgw
 montrealhousing
 montrealimpact
 montrealjerk
-MontrealMeetup <-PSPLT
+MontrealMeetup
 montrealmusic
 MontrealPolitics
 MontrealSeddit
@@ -999,7 +999,7 @@ mtlrave
 MTLtenants
 mulhouse
 Musiqc
-musique <-PSPLT
+musique
 musiquefrancaise
 musiqueinternationale
 Musiques
@@ -1007,7 +1007,7 @@ MuslimFrance
 musulmans
 mwsousecoute
 mybelgium
-MyriamLemay <-PSPLT
+MyriamLemay
 mysterieuxetonnants
 Mythmakers
 Naheulbeuk
@@ -1021,7 +1021,7 @@ narbonne
 NaskapiNews
 NationalismeQuebecois
 natounes
-Naturisme <-PSPLT
+Naturisme
 NCR
 nddl
 Netflixfr
@@ -1055,7 +1055,7 @@ nouvelles
 nouvellesdumonde
 NouvelleTaglineDuSub
 Nouvellevague
-nudisme <-PSPLT
+nudisme
 nuitdebout
 numerovoisin
 numworks
@@ -1113,7 +1113,7 @@ ParlonsSerie
 Partipirate
 PartiPirateQC
 partiquebecois
-PartiSauvage <-PSPLT
+PartiSauvage
 PartiVertQuebec
 PartyEmpire
 PasDeQuestionIdiote
@@ -1190,16 +1190,16 @@ PolitiqueMontreal
 PolitiqueQuebec
 PolyMTL
 Polynesia
-PoneyGonflable <-PSPLT
+PoneyGonflable
 Pontarlier
 pontoise
 PoppersPowerPurple
-Pornfr <-PSPLT
-PornFrancais <-PSPLT
-Pornofrancais <-PSPLT
+Pornfr
+PornFrancais
+Pornofrancais
 PortesDeSalem_JDR
 PostQuebec
-Poupeesdunet <-PSPLT
+Poupeesdunet
 pourtoi
 PoutineIsQuebecois
 poutinereviews
@@ -1245,12 +1245,12 @@ QuebecMusique
 QuebecMuslims
 quebecnomic
 QuebecNordiques
-quebecnsfw <-PSPLT
+quebecnsfw
 Quebecoin
 Quebecon
 QuebecPol
 quebecpolitics
-QuebecPorn <-PSPLT
+QuebecPorn
 QuebecSerieux
 QuebecSolidaire
 quebectrees
@@ -1262,9 +1262,9 @@ QuestionsDeLangue
 quimper
 quoifaireamontreal
 quoimanger
-r4rFrance <-PSPLT
-r4rmontreal <-PSPLT
-r4rQuebec <-PSPLT
+r4rFrance
+r4rmontreal
+r4rQuebec
 Radins
 RafiFamily
 ragefrance
@@ -1281,7 +1281,7 @@ RebootFrance
 Recette
 Recettedegros
 recherches
-recitserotiques <-PSPLT
+recitserotiques
 reddeadonlinetriks
 redditarou
 Redditfr
@@ -1354,7 +1354,7 @@ securiteinformatique
 Sedan
 seddit
 Seine_et_Marne
-seineetmarne <-PSPLT
+seineetmarne
 Senegal
 SenegalPics
 SEOFR
@@ -1362,7 +1362,7 @@ SergeGainsbourg
 SeriesFr
 seriestele
 ServetteFC
-Sexualite <-PSPLT
+Sexualite
 ShadowrunMiami
 Shediac
 Sherbrooke
@@ -1433,7 +1433,7 @@ Technologiefr
 telescopefeed
 terrebonne
 TerreDuMilieu
-tetonsatateratatons <-PSPLT
+tetonsatateratatons
 The_enthoven
 the_Fillon
 The_LePen
@@ -1465,11 +1465,11 @@ trocdeplantes
 troisrivieres
 trollcave
 Trollodrome
-TrouDuCulDeLa208 <-PSPLT
+TrouDuCulDeLa208
 troyes
 truefrance
 TrueRedditFrance
-tukifporno <-PSPLT
+tukifporno
 Tunisia
 Tunisianews
 Tunisianjobs
@@ -1500,7 +1500,7 @@ ValDeMarne
 valenciennes
 ValhallaMovement
 valleyfield
-VapingenFrance <-PSPLT
+VapingenFrance
 Vaud
 veganch
 VeganMontreal
