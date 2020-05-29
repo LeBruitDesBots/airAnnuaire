@@ -22,16 +22,16 @@ class Annuaire:
     def process_sub_list(self, path):
 
         with open(path, 'r') as f:
-            sub_name = f.readline()
-            while sub_name:
+            for line in f.readlines():
+                sub_name = line.strip()
                 if sub_name.startswith('#'):
-                    sub_name = f.readline()
                     continue
 
                 if not any([sub_name == s.name for s in self.subreddits]):
                     self.subreddits.append(Subreddit(sub_name))
 
-                sub_name = f.readline()
+
+
 
 
 
