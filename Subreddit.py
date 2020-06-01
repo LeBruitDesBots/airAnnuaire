@@ -4,6 +4,7 @@ from enum import Enum
 from datetime import datetime
 import pprint
 from prawcore import exceptions
+from json import JSONEncoder, JSONDecoder
 
 
 class SubredditStatus(Enum):
@@ -39,6 +40,13 @@ class Subreddit:
         self.manu_updated = None
 
     def auto_update(self, reddit, post_count=100, comment_count=1000):
+        """Automatically crawl the subreddit to update all possible info
+        
+        parameters:
+            reddit: a praw instance
+            post_count: upper limit of posts parsed for activity metrics
+            comment_count: upper limit of comments parsed for activity metrics"""
+        # FIXME: parse latest posts and comments for activity metrics
         try:
             sub = reddit.subreddit(self.name)
         except (exceptions.NotFound, exceptions.Redirect):
@@ -60,6 +68,9 @@ class Subreddit:
         except exceptions.Redirect:
             self.status = SubredditStatus.DOESNT_EXIST
             return
+        else:
+            # FIXME: discriminate between ACTIVE, INACTIVE, EMPTY
+            self.status = SubredditStatus.ACTIVE
         self.is_nsfw = sub.over18
         self.subscriber_count = sub.subscribers
         self.created_utc = sub.created_utc
@@ -71,3 +82,7 @@ class Subreddit:
         # get latest comments
 
         return 
+
+    def manu_update(self):
+        pass
+
