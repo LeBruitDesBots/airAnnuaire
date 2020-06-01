@@ -4,7 +4,6 @@ from enum import Enum
 from datetime import datetime
 import pprint
 from prawcore import exceptions
-from json import JSONEncoder, JSONDecoder
 
 
 class SubredditStatus(Enum):

@@ -3,7 +3,6 @@
 
 import praw
 from LogInfo import log_info
-import json
 from datetime import date
 import jsonpickle
 
