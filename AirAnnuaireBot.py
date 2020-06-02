@@ -3,7 +3,7 @@
 
 import praw
 from LogInfo import log_info
-from datetime import date
+from datetime import date, datetime
 import jsonpickle
 
 from Subreddit import Subreddit
@@ -36,7 +36,7 @@ class Annuaire:
         with open(path, 'r') as f:
             for line in f.readlines():
                 sub_name = line.strip()
-                if sub_name.startswith('#'):
+                if not sub_name or sub_name.startswith('#'):
                     continue
 
                 if not any([sub_name == s.name for s in self.subreddits]):
@@ -49,13 +49,15 @@ class Annuaire:
             post_count: upper limit of posts parsed for activity metrics
             comment_count: upper limit of comments parsed for activity metrics
             update_theshold: subreddits updated within less than this value (in days) will not be updated"""
-        today = date.today
+        today = date.today()
         for subreddit in self.subreddits:
             if (subreddit.auto_updated is not None 
                 and (today - subreddit.auto_updated).days() >= update_threshold):
                 continue
             subreddit.auto_update(self.reddit)
             subreddit.auto_updated = today
+            #debug
+            print(subreddit.name)
 
     @staticmethod
     def load_from_json(path):
@@ -71,14 +73,11 @@ class Annuaire:
     
 
 def main():
-    annuaire = Annuaire(log_info)
-
-    annuaire.process_sub_list('/home/victor/Documents/source/airAnnuaire/test_list.txt')
+    annuaire = Annuaire(log_info) 
+    annuaire.process_sub_list('/home/victor/Documents/source/airAnnuaire/list.txt')
     annuaire.auto_update()
-    annuaire.save_to_json('/home/victor/Documents/source/airAnnuaire/test.json')
+    annuaire.save_to_json(f"/home/victor/Documents/source/airAnnuaire/{date.today().strftime('%Y-%m-%d')}.json")
 
-    annuaire2 = Annuaire.load_from_json('/home/victor/Documents/source/airAnnuaire/test.json')
-    print('ga')
 
 
 if __name__ == '__main__':
