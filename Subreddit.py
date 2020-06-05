@@ -10,9 +10,10 @@ class SubredditStatus(Enum):
     UNKNOWN = 1
     PUBLIC = 2
     RESTRICTED = 3
-    PRIVATE = 4
-    BANNED = 5
-    DOESNT_EXIST = 6
+    QUARANTINED = 4
+    PRIVATE = 5
+    BANNED = 6
+    DOESNT_EXIST = 7
 
 
 
