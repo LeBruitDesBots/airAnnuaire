@@ -5,6 +5,8 @@ import praw
 from LogInfo import log_info
 from datetime import date, datetime
 import jsonpickle
+import json
+import os
 
 from Subreddit import Subreddit
 
@@ -68,17 +70,41 @@ class Annuaire:
         with open(path, 'w') as f:
             f.write(jsonpickle.encode(self,indent=2))
 
-    def export_md(self, format):
-        pass
+    def export_md(self, config):
+        for output in config['outputs']:
+            sort_dir =  True if (output['sort_direction'] == 'descending') else False
+            self.subreddits.sort(key=lambda s: s.__dict__[output['sort_key']], 
+                                 reverse=sort_dir)
+            with open(os.path.join(dirname, output['file_name']), 'w') as f:
+                #headers
+                for col in output['columns']:
+                    f.write(f"|{col['header']}")
+                f.write("|\n")
+                for col in output['columns']:
+                    f.write(f"|-")
+                f.write("|\n")
+
+                for sub in self.subreddits:
+                    for col in output['columns']:
+                        f.write(f"|{sub.__dict__[col['value']]}")
+                    f.write("|\n")
     
 
 def main():
-    annuaire = Annuaire(log_info) 
-    annuaire.process_sub_list('/home/victor/Documents/source/airAnnuaire/list.txt')
-    annuaire.auto_update()
-    annuaire.save_to_json(f"/home/victor/Documents/source/airAnnuaire/{date.today().strftime('%Y-%m-%d')}.json")
+#    annuaire = Annuaire(log_info) 
+#    annuaire.process_sub_list(os.path.join(dirname, 'partial_list.txt'))
+#    annuaire.auto_update()
+#    annuaire.save_to_json(os.path.join(dirname, 'json_dumps/partial.json'))
+
+    annuaire = Annuaire.load_from_json(os.path.join(dirname, 'json_dumps/partial.json'))
+
+    with open(os.path.join(dirname, 'output config.json'), 'r') as f:
+        config = json.load(f)
+
+    annuaire.export_md(config)
 
 
-
+dirname = os.path.dirname(__file__)
+filename = os.path.join(dirname, 'relative/path/to/file/you/want')
 if __name__ == '__main__':
     main()

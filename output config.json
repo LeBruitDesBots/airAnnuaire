@@ -3,7 +3,7 @@
     {
       "type": "table",
       "description": "Liste des sous actifs par nombre d'abonnés",
-      "file_name": "par abonnés.md",
+      "file_name": "out/par abonnés.md",
       "filters": [
         "ACTIVE"
       ],
@@ -11,23 +11,19 @@
       "sort_direction": "descending",
       "columns": [
         {
-          "header": "Rang",
-          "value": "{index} {({index-old_index}) if {index-old_index!=0}}"
-        },
-        {
           "header": "Nom",
-          "value": "[{name}](/r/{name})"
+          "value": "name"
         },
         {
           "header": "Nombre d'abonnés",
-          "value": "{subscriber_count}"
+          "value": "subscriber_count"
         }
       ]
     },
     {
       "type": "table",
       "description": "Liste des sous publics par date de création",
-      "file_name": "par date.md",
+      "file_name": "out/par date.md",
       "filters": [
         "ACTIVE",
         "INACTIVE",
@@ -37,27 +33,23 @@
       "sort_direction": "ascending",
       "columns": [
         {
-          "header": "Rang",
-          "value": "{index}"
-        },
-        {
           "header": "Nom",
-          "value": "[{name}](/r/{name})"
+          "value": "name"
         },
         {
           "header": "Date de création",
-          "value": "{datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')}"
-        }
+          "value": "created_utc"
+        },
         {
           "header": "Nombre d'abonnés",
-          "value": "{subscriber_count}"
+          "value": "subscriber_count"
         }
       ]
     },
     {
       "type": "table",
       "description": "Liste des sous existants par ordre alphabétique",
-      "file_name": "alphabétique.md",
+      "file_name": "out/alphabétique.md",
       "filters": [
         "ACTIVE",
         "INACTIVE",
@@ -70,18 +62,18 @@
       "columns": [
         {
           "header": "Nom",
-          "value": "[{name}](/r/{name})"
+          "value": "name"
         },
         {
           "header": "Statut",
-          "value": "{status}"
+          "value": "status"
         }
       ]
     },
     {
       "type": "table",
       "description": "Liste des noms traités",
-      "file_name": "alphabétique.md",
+      "file_name": "out/tout.md",
       "filters": [
         "UNKNOWN",
         "ACTIVE",
@@ -96,11 +88,11 @@
       "columns": [
         {
           "header": "Nom",
-          "value": "[{name}](/r/{name})"
+          "value": "name"
         },
         {
           "header": "Statut",
-          "value": "{status}"
+          "value": "status"
         }
       ]
     }

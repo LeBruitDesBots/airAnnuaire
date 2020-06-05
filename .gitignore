@@ -2,3 +2,5 @@ LogInfo.py
 __pycache__
 specs.txt
 json_dumps
+out
+partial_list

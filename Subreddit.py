@@ -8,12 +8,11 @@ from prawcore import exceptions
 
 class SubredditStatus(Enum):
     UNKNOWN = 1
-    ACTIVE = 2
-    INACTIVE = 3
-    EMPTY = 4
-    PRIVATE = 5
-    BANNED = 6
-    DOESNT_EXIST = 7
+    PUBLIC = 2
+    RESTRICTED = 3
+    PRIVATE = 4
+    BANNED = 5
+    DOESNT_EXIST = 6
 
 
 
@@ -24,13 +23,14 @@ class Subreddit:
         self.name = name
         # Auto-retrieved properties
         self.status = SubredditStatus.UNKNOWN
-        self.subreddit_type = ''
         self.is_nsfw = False
         self.subscriber_count = 0
         self.created_utc = 0
         self.description = ''
         self.moderators = list()
         self.official_lang = ''
+        self.post_per_month = None
+        self.comments_per_month = None
         # Manual properties
         self.tags = list()
         
@@ -57,7 +57,7 @@ class Subreddit:
         # quarantine: bool
         # subreddit_type: string [public, ???]
         try:
-            self.subreddit_type = sub.subreddit_type
+            subreddit_type = sub.subreddit_type
         except exceptions.NotFound:
             self.status = SubredditStatus.BANNED
             return
@@ -68,8 +68,13 @@ class Subreddit:
             self.status = SubredditStatus.DOESNT_EXIST
             return
         else:
-            # FIXME: discriminate between ACTIVE, INACTIVE, EMPTY
-            self.status = SubredditStatus.ACTIVE
+            if subreddit_type == 'public':
+                self.status = SubredditStatus.PUBLIC
+            elif subreddit_type == 'restricted':
+                self.status = SubredditStatus.RESTRICTED
+            else:
+                self.status = SubredditStatus.UNKNOWN
+
         self.is_nsfw = sub.over18
         self.subscriber_count = sub.subscribers
         self.created_utc = sub.created_utc
