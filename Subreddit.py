@@ -7,13 +7,22 @@ from prawcore import exceptions
 
 
 class SubredditStatus(Enum):
-    UNKNOWN = 1
-    PUBLIC = 2
-    RESTRICTED = 3
-    QUARANTINED = 4
-    PRIVATE = 5
-    BANNED = 6
-    DOESNT_EXIST = 7
+    UNKNOWN = 0
+    PUBLIC = 1
+    RESTRICTED = 2
+    QUARANTINED = 3
+    PRIVATE = 4
+    BANNED = 5
+    DOESNT_EXIST = 6
+
+    def __str__(self):
+        return ['Statut inconnu',
+                'Public',
+                'Restreint',
+                'En quarantaine',
+                'Privé',
+                'Banni',
+                '404'][self.value]
 
 
 
@@ -81,7 +90,7 @@ class Subreddit:
         self.created_utc = sub.created_utc
         self.description = sub.public_description
         self.official_lang = sub.lang
-        self.mods = [mod.name for mod in sub.moderator()]
+        self.moderators = [mod.name for mod in sub.moderator()]
         # get latest posts
 
         # get latest comments

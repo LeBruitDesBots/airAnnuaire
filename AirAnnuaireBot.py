@@ -73,10 +73,10 @@ class Annuaire:
     def export_md(self, config):
         for output in config['outputs']:
             sort_dir =  True if (output['sort_direction'] == 'descending') else False
-            self.subreddits.sort(key=lambda s: s.__dict__[output['sort_key']], 
+            self.subreddits.sort(key=(lambda s: s.__dict__[output['sort_key']].lower() if output['sort_key'] == 'name' else s.__dict__[output['sort_key']]), 
                                  reverse=sort_dir)
             with open(os.path.join(dirname, output['file_name']), 'w') as f:
-                #headers
+                #write headers and separators
                 for col in output['columns']:
                     f.write(f"|{col['header']}")
                 f.write("|\n")
@@ -84,17 +84,36 @@ class Annuaire:
                     f.write(f"|-")
                 f.write("|\n")
 
+                i = 0
                 for sub in self.subreddits:
+                    # apply filters
+                    if sub.status.name not in output['status_filter']:
+                        continue
+                    if output['nsfw_filter'] and sub.is_nsfw:
+                        continue
+
+                    i += 1
+                    #write column values
                     for col in output['columns']:
-                        f.write(f"|{sub.__dict__[col['value']]}")
+                        f.write("|")
+                        f.write(col['value'].format(index = i,
+                                                    status = str(sub.status),
+                                                    name  = sub.name,
+                                                    is_nsfw  = 'PSPLT' if sub.is_nsfw else '',
+                                                    subscriber_count = sub.subscriber_count,
+                                                    created_utc = sub.created_utc,
+                                                    description = sub.description,
+                                                    top_mod = sub.moderators[0] if sub.moderators else '',
+                                                    all_mods = ', '.join(sub.moderators),
+                                                    quick_lang = sub.official_lang))
                     f.write("|\n")
     
 
 def main():
-#    annuaire = Annuaire(log_info) 
-#    annuaire.process_sub_list(os.path.join(dirname, 'partial_list.txt'))
-#    annuaire.auto_update()
-#    annuaire.save_to_json(os.path.join(dirname, 'json_dumps/partial.json'))
+    #annuaire = Annuaire(log_info) 
+    #annuaire.process_sub_list(os.path.join(dirname, 'partial_list.txt'))
+    #annuaire.auto_update()
+    #annuaire.save_to_json(os.path.join(dirname, 'json_dumps/partial.json'))
 
     annuaire = Annuaire.load_from_json(os.path.join(dirname, 'json_dumps/partial.json'))
 

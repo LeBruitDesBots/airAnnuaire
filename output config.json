@@ -3,96 +3,62 @@
     {
       "type": "table",
       "description": "Liste des sous actifs par nombre d'abonnés",
-      "file_name": "out/par abonnés.md",
-      "filters": [
-        "ACTIVE"
+      "file_name": "out/par abos public sfw.md",
+      "status_filter": [
+        "PUBLIC",
+        "RESTRICTED"
       ],
+      "nsfw_filter": true,
       "sort_key": "subscriber_count",
       "sort_direction": "descending",
       "columns": [
         {
+          "header": "Rang",
+          "value": "{index}"
+        },
+        {
           "header": "Nom",
-          "value": "name"
+          "value": "[{name}](/r/{name})"
         },
         {
           "header": "Nombre d'abonnés",
-          "value": "subscriber_count"
+          "value": "{subscriber_count}"
         }
       ]
     },
+
     {
       "type": "table",
-      "description": "Liste des sous publics par date de création",
-      "file_name": "out/par date.md",
-      "filters": [
-        "ACTIVE",
-        "INACTIVE",
-        "EMPTY"
-      ],
-      "sort_key": "created_utc",
-      "sort_direction": "ascending",
-      "columns": [
-        {
-          "header": "Nom",
-          "value": "name"
-        },
-        {
-          "header": "Date de création",
-          "value": "created_utc"
-        },
-        {
-          "header": "Nombre d'abonnés",
-          "value": "subscriber_count"
-        }
-      ]
-    },
-    {
-      "type": "table",
-      "description": "Liste des sous existants par ordre alphabétique",
-      "file_name": "out/alphabétique.md",
-      "filters": [
-        "ACTIVE",
-        "INACTIVE",
-        "EMPTY",
-        "PRIVATE",
-        "BANNED"
-      ],
-      "sort_key": "name",
-      "sort_direction": "ascending",
-      "columns": [
-        {
-          "header": "Nom",
-          "value": "name"
-        },
-        {
-          "header": "Statut",
-          "value": "status"
-        }
-      ]
-    },
-    {
-      "type": "table",
-      "description": "Liste des noms traités",
-      "file_name": "out/tout.md",
-      "filters": [
+      "description": "Liste des sous actifs par nombre d'abonnés",
+      "file_name": "out/alpha tout.md",
+      "status_filter": [
         "UNKNOWN",
-        "ACTIVE",
-        "INACTIVE",
-        "EMPTY",
+        "PUBLIC",
+        "RESTRICTED",
+        "QUARANTINED",
         "PRIVATE",
         "BANNED",
         "DOESNT_EXIST"
       ],
+      "nsfw_filter": false,
       "sort_key": "name",
       "sort_direction": "ascending",
       "columns": [
         {
           "header": "Nom",
-          "value": "name"
+          "value": "[{name}](/r/{name})"
+        },
+        {
+          "header": "Nombre d'abonnés",
+          "value": "{subscriber_count}"
         },
         {
           "header": "Statut",
-          "value": "status"
+          "value": "{status}"
+        },
+        {
+          "header": "PSPLT",
+          "value": "{is_nsfw}"
         }
       ]
     }
