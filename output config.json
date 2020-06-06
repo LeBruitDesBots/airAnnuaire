@@ -9,6 +9,7 @@
         "RESTRICTED"
       ],
       "nsfw_filter": true,
+      "limit": null,
       "sort_key": "subscriber_count",
       "sort_direction": "descending",
       "columns": [
@@ -41,6 +42,7 @@
         "DOESNT_EXIST"
       ],
       "nsfw_filter": false,
+      "limit": null,
       "sort_key": "name",
       "sort_direction": "ascending",
       "columns": [
