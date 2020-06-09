@@ -2,14 +2,34 @@
   "outputs": [
     {
       "type": "table",
-      "description": "Liste des sous actifs par nombre d'abonnés",
+      "description": "Liste des 50 sous francophones comptant le plus d'abonnés",
       "file_name": "out/par abos public sfw.md",
-      "status_filter": [
-        "PUBLIC",
-        "RESTRICTED"
+      "filters": [
+        {
+          "type": "whitelist",
+          "key": "status",
+          "value": [
+            "PUBLIC",
+            "RESTRICTED"
+          ]
+        },
+        {
+          "type": "blacklist",
+          "key": "is_nsfw",
+          "value": [true]
+        },
+        {
+          "type": "min",
+          "key": "subscriber_count",
+          "value": 10
+        },
+        {
+          "type": "whitelist",
+          "key": "official_lang",
+          "value": ["fr"]
+        }
       ],
-      "nsfw_filter": true,
-      "limit": null,
+      "limit": 50,
       "sort_key": "subscriber_count",
       "sort_direction": "descending",
       "columns": [
@@ -19,7 +39,7 @@
         },
         {
           "header": "Nom",
-          "value": "[{name}](/r/{name})"
+          "value": "[/r/{name}](/r/{name})"
         },
         {
           "header": "Nombre d'abonnés",
@@ -27,22 +47,64 @@
         }
       ]
     },
-
     {
       "type": "table",
-      "description": "Liste des sous actifs par nombre d'abonnés",
+      "description": "Liste alphabétique de tous les sous-reddit traités",
       "file_name": "out/alpha tout.md",
-      "status_filter": [
-        "UNKNOWN",
-        "PUBLIC",
-        "RESTRICTED",
-        "QUARANTINED",
-        "PRIVATE",
-        "BANNED",
-        "DOESNT_EXIST"
+      "filters": [
+        {
+          "type": "blacklist",
+          "key": "status",
+          "value": [
+            "DOESNT_EXIST"
+          ]
+        }
       ],
-      "nsfw_filter": false,
-      "limit": null,
+      "limit": -1,
+      "sort_key": "name",
+      "sort_direction": "ascending",
+      "columns": [
+        {
+          "header": "Nom",
+          "value": "[{name}](/r/{name})"
+        },
+        {
+          "header": "Nombre d'abonnés",
+          "value": "{subscriber_count}"
+        },
+        {
+          "header": "Statut",
+          "value": "{status}"
+        },
+        {
+          "header": "Langue",
+          "value": "{official_lang}"
+        },
+        {
+          "header": "PSPLT",
+          "value": "{is_nsfw}"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "description": "Liste alphabétique de tous les sous-reddit francophones",
+      "file_name": "out/alpha fr.md",
+      "filters": [
+        {
+          "type": "blacklist",
+          "key": "status",
+          "value": [
+            "DOESNT_EXIST"
+          ]
+        },
+        {
+          "type": "whitelist",
+          "key": "official_lang",
+          "value": ["fr"]
+        }
+      ],
+      "limit": -1,
       "sort_key": "name",
       "sort_direction": "ascending",
       "columns": [

@@ -33,6 +33,33 @@ class Annuaire:
         """restore an instance from a serialized state"""
         self.__dict__.update(state)
 
+    def _filter_check(self, sub, filters):
+        pass_filters = True
+        for f in filters:
+            if f['type'] == 'whitelist':
+                if f['key'] == 'status':
+                    if sub.__dict__[f['key']].name not in f['value']:
+                        pass_filters = False
+                else:
+                    if sub.__dict__[f['key']] not in f['value']:
+                        pass_filters = False
+            elif f['type'] == 'blacklist':
+                if f['key'] == 'status':
+                    if sub.__dict__[f['key']].name in f['value']:
+                        pass_filters = False
+                else:
+                    if sub.__dict__[f['key']] in f['value']:
+                        pass_filters = False
+            elif f['type'] == 'min':
+                if sub.__dict__[f['key']] < f['value']:
+                    pass_filters = False
+            elif f['type'] == 'max':
+                if sub.__dict__[f['key']] > f['value']:
+                    pass_filters = False
+            else:
+                raise Exception('invalit filter type in config file')
+        return pass_filters
+
     def process_sub_list(self, path):
 
         with open(path, 'r') as f:
@@ -84,19 +111,19 @@ class Annuaire:
                     f.write(f"|-")
                 f.write("|\n")
 
-                i = 0
+                index = 0
                 for sub in self.subreddits:
                     # apply filters
-                    if sub.status.name not in output['status_filter']:
-                        continue
-                    if output['nsfw_filter'] and sub.is_nsfw:
+                    if not self._filter_check(sub, output['filters']):
                         continue
 
-                    i += 1
+                    index += 1
+                    if output['limit'] > 0 and index > output['limit']:
+                        break
                     #write column values
                     for col in output['columns']:
                         f.write("|")
-                        f.write(col['value'].format(index = i,
+                        f.write(col['value'].format(index = index,
                                                     status = str(sub.status),
                                                     name  = sub.name,
                                                     is_nsfw  = 'PSPLT' if sub.is_nsfw else '',
@@ -105,9 +132,9 @@ class Annuaire:
                                                     description = sub.description,
                                                     top_mod = sub.moderators[0] if sub.moderators else '',
                                                     all_mods = ', '.join(sub.moderators),
-                                                    quick_lang = sub.official_lang))
+                                                    official_lang = sub.official_lang))
                     f.write("|\n")
-    
+
 
 def main():
     #annuaire = Annuaire(log_info) 
