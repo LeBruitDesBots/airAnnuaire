@@ -141,13 +141,20 @@ def main():
     #annuaire.process_sub_list(os.path.join(dirname, 'partial_list.txt'))
     #annuaire.auto_update()
     #annuaire.save_to_json(os.path.join(dirname, 'json_dumps/partial.json'))
+    annuaire = Annuaire(log_info) 
+    annuaire.process_sub_list(os.path.join(dirname, 'test_list.txt'))
+    annuaire.auto_update()
+    annuaire.save_to_json(os.path.join(dirname, 'json_dumps/test.json'))
 
-    annuaire = Annuaire.load_from_json(os.path.join(dirname, 'json_dumps/partial.json'))
+    for sub in annuaire.subreddits:
+        print(sub.get_activity_score())
 
-    with open(os.path.join(dirname, 'output config.json'), 'r') as f:
-        config = json.load(f)
+    #annuaire = Annuaire.load_from_json(os.path.join(dirname, 'json_dumps/partial.json'))
 
-    annuaire.export_md(config)
+    #with open(os.path.join(dirname, 'output config.json'), 'r') as f:
+    #    config = json.load(f)
+
+    #annuaire.export_md(config)
 
 
 dirname = os.path.dirname(__file__)
