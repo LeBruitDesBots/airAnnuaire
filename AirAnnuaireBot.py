@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 import praw
-from LogInfo import log_info
+from log_info import log_info
 from datetime import date, datetime
 import jsonpickle
 import json
@@ -20,7 +20,7 @@ class Annuaire:
         else:
             self.reddit = praw.Reddit(client_id=log_info['client_id'],
                                       client_secret=log_info['client_secret'],
-                                      user_agent='u/LeBruitDesBots indexing subreddits')
+                                      user_agent='u/TranscripteurTwitter indexing subreddits')
 
     def __getstate__(self):
         """Copy the instance's state and remove data that shouldn't be serialized"""
@@ -99,10 +99,13 @@ class Annuaire:
 
     def export_md(self, config):
         for output in config['outputs']:
+            sort_key = self._get_sort_key(output)
+                
             sort_dir =  True if (output['sort_direction'] == 'descending') else False
-            self.subreddits.sort(key=(lambda s: s.__dict__[output['sort_key']].lower() if output['sort_key'] == 'name' else s.__dict__[output['sort_key']]), 
+            self.subreddits.sort(key=sort_key, 
                                  reverse=sort_dir)
-            with open(os.path.join(dirname, output['file_name']), 'w') as f:
+            with open(os.path.join(dirname, output['file_name'],), 
+                      'w', encoding='utf-8') as f:
                 #write headers and separators
                 for col in output['columns']:
                     f.write(f"|{col['header']}")
@@ -132,32 +135,48 @@ class Annuaire:
                                                     description = sub.description,
                                                     top_mod = sub.moderators[0] if sub.moderators else '',
                                                     all_mods = ', '.join(sub.moderators),
-                                                    official_lang = sub.official_lang))
+                                                    official_lang = sub.official_lang,
+                                                    comments_raw = int(sub.comments_in_week),
+                                                    posts_raw = int(sub.post_in_month),
+                                                    comment_score = '{:.1f}'.format(sub.get_comment_activity_score()),
+                                                    post_score = '{:.1f}'.format(sub.get_post_activity_score()),
+                                                    total_score = '{:.1f}'.format(sub.get_activity_score())))
                     f.write("|\n")
-
+                    
+    def _get_sort_key(self, output_config):
+        if output_config['sort_key'] == 'name':
+            return lambda s: s.name.lower()
+        if output_config['sort_key'] == 'status':
+            return lambda s: s.status.name
+        if output_config['sort_key'] == 'total_score':
+            return lambda s: s.get_activity_score()
+        if output_config['sort_key'] == 'post_score':
+            return lambda s: s.get_post_activity_score()
+        if output_config['sort_key'] == 'comment_score':
+            return lambda s: s.get_comment_activity_score()
+            
+        return lambda s : s.__dict__[output_config['sort_key']]
 
 def main():
-    #annuaire = Annuaire(log_info) 
-    #annuaire.process_sub_list(os.path.join(dirname, 'partial_list.txt'))
-    #annuaire.auto_update()
-    #annuaire.save_to_json(os.path.join(dirname, 'json_dumps/partial.json'))
-    annuaire = Annuaire(log_info) 
-    annuaire.process_sub_list(os.path.join(dirname, 'test_list.txt'))
-    annuaire.auto_update()
-    annuaire.save_to_json(os.path.join(dirname, 'json_dumps/test.json'))
+#    annuaire = Annuaire(log_info) 
+#    annuaire.process_sub_list(os.path.join(dirname, 'list.txt'))
+#    annuaire.auto_update()
+#    annuaire.save_to_json(os.path.join(dirname, 'json_dumps/2020-06-15.json'))
+#    annuaire = Annuaire(log_info) 
+#    annuaire.process_sub_list(os.path.join(dirname, 'test_list.txt'))
+#    annuaire.auto_update()
+#    annuaire.save_to_json(os.path.join(dirname, 'json_dumps/test.json'))
 
-    for sub in annuaire.subreddits:
-        print(sub.get_activity_score())
 
-    #annuaire = Annuaire.load_from_json(os.path.join(dirname, 'json_dumps/partial.json'))
 
-    #with open(os.path.join(dirname, 'output config.json'), 'r') as f:
-    #    config = json.load(f)
+    annuaire = Annuaire.load_from_json(os.path.join(dirname, 'json_dumps/2020-06-15.json'))
 
-    #annuaire.export_md(config)
+    with open(os.path.join(dirname, 'total.json'), 'r', encoding='utf-8') as f:
+        config = json.load(f)
+
+    annuaire.export_md(config)
 
 
 dirname = os.path.dirname(__file__)
-filename = os.path.join(dirname, 'relative/path/to/file/you/want')
 if __name__ == '__main__':
     main()
