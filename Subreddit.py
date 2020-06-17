@@ -122,6 +122,7 @@ class Subreddit:
                 break
             
             post_count += 1
+            self._analyse_lang(submission.title)
 
         if limit_reached:
             # extrapolate post count over DAYS_IN_MONTH period
@@ -144,6 +145,7 @@ class Subreddit:
                 break
             
             comment_count += 1
+            self._analyse_lang(comment.body)
 
         if limit_reached:
             # extrapolate post count over DAYS_IN_MONTH period
@@ -152,6 +154,17 @@ class Subreddit:
         
         self.comments_in_week = comment_count
         return
+
+    def _analyse_lang(self, text):
+        try:
+            lang = langdetect.detect(text)
+        except langdetect.lang_detect_exception.LangDetectException:
+            return
+        
+        if lang in self.languages:
+            self.languages[lang] += 1
+        else:
+            self.languages[lang] = 1
 
     def get_post_activity_score(self):
         if self.post_in_month is None:
@@ -169,6 +182,14 @@ class Subreddit:
         if post_score is None or comment_score is None:
             return
         return post_score + comment_score
+
+    def get_langs(self, threshold):
+        val = []
+        total = sum(self.languages.values())
+        for lang, count in self.languages.items():
+            if (count / total) > threshold:
+                val.append(lang)
+        return val
 
     def manu_update(self):
         pass
