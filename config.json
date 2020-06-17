@@ -1,4 +1,64 @@
 {
+  "input": {
+    "current": "json_dumps/2020-06-15.json",
+    "reference": null
+  },
+  "preferences":{
+    "auto_update_frequency": [
+      {
+        "filters": [
+          {
+            "type": "whitelist",
+            "key": "status",
+            "value": [
+              "UNKNOWN"
+            ]
+          }
+        ],
+        "days": 0
+      },
+      {
+        "filters": [
+          {
+            "type": "whitelist",
+            "key": "status",
+            "value": [
+              "PUBLIC",
+              "RESTRICTED"
+            ]
+          }
+        ],
+        "days": 1
+      },
+      {
+        "filters": [
+          {
+            "type": "whitelist",
+            "key": "status",
+            "value": [
+              "QUARANTINED",
+              "PRIVATE",
+              "BANNED"
+            ]
+          }
+        ],
+        "days": 28
+      },
+      {
+        "filters": [
+          {
+            "type": "whitelist",
+            "key": "status",
+            "value": [
+              "DOESNT_EXIST"
+            ]
+          }
+        ],
+        "days": -1
+      }
+    ],
+    "date_format": "%Y-%m-%d"
+  },
   "outputs": [
     {
       "type": "table",
