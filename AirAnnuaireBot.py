@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 import praw
-from log_info import log_info
+from LogInfo import log_info
 from datetime import date, datetime
 import jsonpickle
 import json
@@ -126,21 +126,7 @@ class Annuaire:
                     #write column values
                     for col in output['columns']:
                         f.write("|")
-                        f.write(col['value'].format(index = index,
-                                                    status = str(sub.status),
-                                                    name  = sub.name,
-                                                    is_nsfw  = 'PSPLT' if sub.is_nsfw else '',
-                                                    subscriber_count = sub.subscriber_count,
-                                                    created_utc = sub.created_utc,
-                                                    description = sub.description,
-                                                    top_mod = sub.moderators[0] if sub.moderators else '',
-                                                    all_mods = ', '.join(sub.moderators),
-                                                    official_lang = sub.official_lang,
-                                                    comments_raw = int(sub.comments_in_week),
-                                                    posts_raw = int(sub.post_in_month),
-                                                    comment_score = '{:.1f}'.format(sub.get_comment_activity_score()),
-                                                    post_score = '{:.1f}'.format(sub.get_post_activity_score()),
-                                                    total_score = '{:.1f}'.format(sub.get_activity_score())))
+                        f.write(self._format_col(col['value'], sub, index))
                     f.write("|\n")
                     
     def _get_sort_key(self, output_config):
@@ -156,6 +142,23 @@ class Annuaire:
             return lambda s: s.get_comment_activity_score()
             
         return lambda s : s.__dict__[output_config['sort_key']]
+    
+    def _format_col(self, value, sub, index):
+        return value.format(index = index,
+                            status = str(sub.status),
+                            name  = sub.name,
+                            is_nsfw  = 'PSPLT' if sub.is_nsfw else '',
+                            subscriber_count = sub.subscriber_count,
+                            created_utc = sub.created_utc,
+                            description = sub.description,
+                            top_mod = sub.moderators[0] if sub.moderators else '',
+                            all_mods = ', '.join(sub.moderators),
+                            official_lang = sub.official_lang,
+                            comments_raw = int(sub.comments_in_week),
+                            posts_raw = int(sub.post_in_month),
+                            comment_score = '{:.1f}'.format(sub.get_comment_activity_score()),
+                            post_score = '{:.1f}'.format(sub.get_post_activity_score()),
+                            total_score = '{:.1f}'.format(sub.get_activity_score()))
 
 def main():
 #    annuaire = Annuaire(log_info) 
@@ -171,7 +174,7 @@ def main():
 
     annuaire = Annuaire.load_from_json(os.path.join(dirname, 'json_dumps/2020-06-15.json'))
 
-    with open(os.path.join(dirname, 'total.json'), 'r', encoding='utf-8') as f:
+    with open(os.path.join(dirname, 'config.json'), 'r', encoding='utf-8') as f:
         config = json.load(f)
 
     annuaire.export_md(config)
