@@ -1,9 +1,10 @@
 {
-  "input": {
-    "current": "json_dumps/2020-06-15.json",
-    "reference": null
-  },
   "preferences":{
+    "save_directory": "json_dumps",
+    "output_directory": "out",
+    "date_format": "%Y-%m-%d",
+    "sub_list": "test_list.txt",
+    "lang_use_threshold": 0.1,
     "auto_update_frequency": [
       {
         "filters": [
@@ -56,15 +57,13 @@
         ],
         "days": -1
       }
-    ],
-    "date_format": "%Y-%m-%d",
-    "lang_use_threshold": 0.1
+    ]
   },
   "outputs": [
     {
       "type": "table",
       "description": "Liste des 50 sous francophones comptant le plus d'abonnés",
-      "file_name": "out/par abos public sfw.md",
+      "file_name": "par abos public sfw.md",
       "filters": [
         {
           "type": "whitelist",
@@ -111,7 +110,7 @@
     {
       "type": "table",
       "description": "Liste alphabétique de tous les sous-reddit traités",
-      "file_name": "out/alpha tout.md",
+      "file_name": "alpha tout.md",
       "filters": [
         {
           "type": "blacklist",
@@ -150,7 +149,7 @@
     {
       "type": "table",
       "description": "Liste alphabétique de tous les sous-reddit francophones",
-      "file_name": "out/alpha fr.md",
+      "file_name": "alpha fr.md",
       "filters": [
         {
           "type": "blacklist",

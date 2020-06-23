@@ -1,8 +1,6 @@
-#!/usr/bin/env python3
 # encoding: utf-8
 
 import praw
-from LogInfo import log_info
 from datetime import date, datetime
 import jsonpickle
 import json
@@ -20,7 +18,7 @@ class Annuaire:
         else:
             self.reddit = praw.Reddit(client_id=log_info['client_id'],
                                       client_secret=log_info['client_secret'],
-                                      user_agent='u/TranscripteurTwitter indexing subreddits')
+                                      user_agent=log_info['user_agent'])
 
     def __getstate__(self):
         """Copy the instance's state and remove data that shouldn't be serialized"""
@@ -33,6 +31,10 @@ class Annuaire:
         """restore an instance from a serialized state"""
         self.__dict__.update(state)
 
+    def login(self, log_info):
+        self.reddit = praw.Reddit(client_id=log_info['client_id'],
+                                  client_secret=log_info['client_secret'],
+                                  user_agent=log_info['user_agent'])
     def _filter_check(self, sub, filters):
         pass_filters = True
         for f in filters:
@@ -81,7 +83,7 @@ class Annuaire:
         today = date.today()
         for subreddit in self.subreddits:
             if (subreddit.auto_updated is not None 
-                and (today - subreddit.auto_updated).days() >= update_threshold):
+                and (today - subreddit.auto_updated).days >= update_threshold):
                 continue
             subreddit.auto_update(self.reddit)
             subreddit.auto_updated = today
@@ -97,8 +99,8 @@ class Annuaire:
         with open(path, 'w') as f:
             f.write(jsonpickle.encode(self,indent=2))
 
-    def export_md(self, config):
-        for output in config['outputs']:
+    def export_md(self, config, dirname):
+        for output in config:
             sort_key = self._get_sort_key(output)
                 
             sort_dir =  True if (output['sort_direction'] == 'descending') else False
@@ -159,23 +161,3 @@ class Annuaire:
                             comment_score = '{:.1f}'.format(sub.get_comment_activity_score()),
                             post_score = '{:.1f}'.format(sub.get_post_activity_score()),
                             total_score = '{:.1f}'.format(sub.get_activity_score()))
-
-def main():
-#    annuaire = Annuaire(log_info) 
-#    annuaire.process_sub_list(os.path.join(dirname, 'test_list.txt'))
-#    annuaire.auto_update()
-#    annuaire.save_to_json(os.path.join(dirname, 'json_dumps/test_lang.json'))
-
-    annuaire = Annuaire.load_from_json(os.path.join(dirname, 'json_dumps/test_lang.json'))
-
-    for sub in annuaire.subreddits:
-        print(sub.get_langs(0.1))
-#    with open(os.path.join(dirname, 'config.json'), 'r', encoding='utf-8') as f:
-#        config = json.load(f)
-
-#    annuaire.export_md(config)
-
-
-dirname = os.path.dirname(__file__)
-if __name__ == '__main__':
-    main()
