@@ -14,8 +14,8 @@ from Subreddit import Subreddit
 DIRNAME = os.path.dirname(__file__)
 
 
-def main(argv):
-    preferences, output_config = load_config()
+def main(update = True, output = True, config_path = 'config.json'):
+    preferences, output_config = load_config(config_path)
 
     # browse save dir, load 2 latest annuaires
     files = []
@@ -36,8 +36,7 @@ def main(argv):
         current = Annuaire()
         reference = None
 
-    # update latest, save as new name (if argument matches)
-    if True:#'-u' in argv:
+    if update:
         current.login(log_info)
         current.process_sub_list(os.path.join(DIRNAME, 
                                               preferences['sub_list']))
@@ -46,8 +45,7 @@ def main(argv):
                                           preferences['save_directory'], 
                                           date.today().isoformat()))
 
-    # export outputs (if arg)
-    if True: #'-o' in argv:
+    if output: 
         current.export_md(output_config,
                           os.path.join(DIRNAME, preferences['output_directory']))
 
@@ -79,4 +77,4 @@ def load_config(filename = 'config.json'):
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    main()
