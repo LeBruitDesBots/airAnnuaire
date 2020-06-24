@@ -1,9 +1,13 @@
 {
-  "preferences":{
+  "preferences": {
     "save_directory": "json_dumps",
     "output_directory": "out",
     "date_format": "%Y-%m-%d",
-    "sub_list": "test_list.txt",
+    "sub_list": "test_list.txt"
+  },
+  "update": {
+    "post_limit": 100,
+    "comment_limit": 1000,
     "lang_use_threshold": 0.1,
     "auto_update_frequency": [
       {

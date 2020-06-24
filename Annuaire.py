@@ -32,9 +32,11 @@ class Annuaire:
         self.__dict__.update(state)
 
     def login(self, log_info):
+        """Login into a praw instance"""
         self.reddit = praw.Reddit(client_id=log_info['client_id'],
                                   client_secret=log_info['client_secret'],
                                   user_agent=log_info['user_agent'])
+
     def _filter_check(self, sub, filters):
         pass_filters = True
         for f in filters:
@@ -59,8 +61,19 @@ class Annuaire:
                 if sub.__dict__[f['key']] > f['value']:
                     pass_filters = False
             else:
-                raise Exception('invalit filter type in config file')
+                raise Exception('invalid filter type in config file')
         return pass_filters
+
+    def _check_update_threshold(self, sub, auto_update_frequencies):
+        """Returns True if subreddit should be updated according to config file specifications,
+        False otherwise"""
+        if sub.auto_updated is None:
+            return True
+        today = date.today()
+        for freq in auto_update_frequencies:
+            if self._filter_check(sub, freq['filters']):
+                return (date.today() - sub.auto_updated).days >= freq['days']
+        return False
 
     def process_sub_list(self, path):
 
@@ -73,33 +86,31 @@ class Annuaire:
                 if not any([sub_name == s.name for s in self.subreddits]):
                     self.subreddits.append(Subreddit(sub_name))
 
-    def auto_update(self, post_count=100, comment_count=1000, update_threshold = 0):
+ #   def auto_update(self, post_count=100, comment_count=1000, update_threshold = 0):
+    def auto_update(self, config):
         """Automatically crawl the subreddits to update all possible info
-        
-        parameters:
-            post_count: upper limit of posts parsed for activity metrics
-            comment_count: upper limit of comments parsed for activity metrics
-            update_theshold: subreddits updated within less than this value (in days) will not be updated"""
+        """
         today = date.today()
         for subreddit in self.subreddits:
-            if (subreddit.auto_updated is not None 
-                and (today - subreddit.auto_updated).days >= update_threshold):
-                continue
-            subreddit.auto_update(self.reddit)
-            subreddit.auto_updated = today
+            if self._check_update_threshold(subreddit, config['auto_update_frequency']):
+                subreddit.auto_update(self.reddit)
+                subreddit.auto_updated = today
             #debug
             print(subreddit.name)
 
     @staticmethod
     def load_from_json(path):
+        """Load a jsonpickled annuaire from the given path"""
         with open(path, 'r') as f:
             return jsonpickle.decode(f.read())
 
     def save_to_json(self, path):
+        """Export current annuaire to a jsonpickle format"""
         with open(path, 'w') as f:
             f.write(jsonpickle.encode(self,indent=2))
 
     def export_md(self, config, dirname):
+        """Export markdown files as specified in config file"""
         for output in config:
             sort_key = self._get_sort_key(output)
                 
