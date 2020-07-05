@@ -101,6 +101,11 @@
       "limit": 50,
       "sort_key": "subscriber_count",
       "sort_direction": "descending",
+      "nsfw_str": "PSPLT",
+      "sfw_str": "",
+      "float_format": "{:.1f}",
+      "text_before":"List des 50 sous-Reddits francophones comptant le plus d'abonnés en dates du {today}",
+      "text_after":"Cette liste est mise à jour automatiquement par /u/LeBruitDesBots.",
       "columns": [
         {
           "header": "Rang",
@@ -135,6 +140,11 @@
       "limit": -1,
       "sort_key": "name",
       "sort_direction": "ascending",
+      "nsfw_str": "PSPLT",
+      "sfw_str": "",
+      "float_format": "{:.1f}",
+      "text_before":"List des 50 sous-Reddits francophones comptant le plus d'abonnés en dates du {today}",
+      "text_after":"Cette liste est mise à jour automatiquement par /u/LeBruitDesBots.",
       "columns": [
         {
           "header": "Nom",
@@ -184,6 +194,11 @@
       "limit": -1,
       "sort_key": "name",
       "sort_direction": "ascending",
+      "nsfw_str": "PSPLT",
+      "sfw_str": "",
+      "float_format": "{:.1f}",
+      "text_before":"List des 50 sous-Reddits francophones comptant le plus d'abonnés en dates du {today}",
+      "text_after":"Cette liste est mise à jour automatiquement par /u/LeBruitDesBots.",
       "columns": [
         {
           "header": "Nom",

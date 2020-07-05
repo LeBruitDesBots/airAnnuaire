@@ -112,17 +112,20 @@ class Annuaire:
         with open(path, 'w') as f:
             f.write(jsonpickle.encode(self,indent=2))
 
-    def export_md(self, config, dirname):
+    def export_md(self, config, dirname, reference=None):
         """Export markdown files as specified in config file"""
         if not os.path.exists(dirname):
             os.makedirs(os.path.join(dirname))
 
         for output in config:
             sort_key = self._get_sort_key(output)
-                
-            sort_dir =  True if (output['sort_direction'] == 'descending') else False
+            sort_dir = True if (output['sort_direction'] == 'descending') else False
             self.subreddits.sort(key=sort_key, 
                                  reverse=sort_dir)
+            if reference is not None:
+                reference.subreddits.sort(key=sort_key,
+                                          reverse=sort_dir)
+
             with open(os.path.join(dirname, output['file_name'],), 
                       'w', encoding='utf-8') as f:
                 #write headers and separators
@@ -156,7 +159,7 @@ class Annuaire:
                     #write column values
                     for col in output['columns']:
                         f.write("|")
-                        f.write(self._format_col(col['value'], sub, index))
+                        f.write(self._format_col(col['value'], sub, index, reference))
                     f.write("|\n")
                     
     def _get_sort_key(self, output_config):
@@ -173,7 +176,7 @@ class Annuaire:
             
         return lambda s : s.__dict__[output_config['sort_key']]
     
-    def _format_col(self, value, sub, index):
+    def _format_col(self, value, sub, index, reference):
         return value.format(index = index,
                             status = str(sub.status),
                             name  = sub.name,
