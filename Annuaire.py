@@ -31,8 +31,11 @@ class Annuaire:
         """restore an instance from a serialized state"""
         self.__dict__.update(state)
 
-    def login(self, log_info):
+
+    def login(self, log_info_path):
         """Login into a praw instance"""
+        with open(log_info_path, 'r', encoding="utf-8") as f:
+            log_info = json.load(f)['reddit']
         self.reddit = praw.Reddit(client_id=log_info['client_id'],
                                   client_secret=log_info['client_secret'],
                                   user_agent=log_info['user_agent'])
@@ -111,6 +114,9 @@ class Annuaire:
 
     def export_md(self, config, dirname):
         """Export markdown files as specified in config file"""
+        if not os.path.exists(dirname):
+            os.makedirs(os.path.join(dirname))
+
         for output in config:
             sort_key = self._get_sort_key(output)
                 
@@ -124,7 +130,18 @@ class Annuaire:
                     f.write(f"|{col['header']}")
                 f.write("|\n")
                 for col in output['columns']:
-                    f.write(f"|-")
+                    f.write("|")
+                    if 'align' in col:
+                        if col['align'] == 'left':
+                            f.write(":-")
+                        elif col['align'] == 'right':
+                            f.write("-:")
+                        elif col['align'] == 'center':
+                            f.write(":-:")
+                        else:
+                            f.write("-")
+                    else:
+                        f.write("-")
                 f.write("|\n")
 
                 index = 0

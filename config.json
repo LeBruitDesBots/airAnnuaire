@@ -1,11 +1,16 @@
 {
   "preferences": {
+    "log_info_path": "LogInfo.json",
     "save_directory": "json_dumps",
     "output_directory": "out",
     "date_format": "%Y-%m-%d",
-    "sub_list": "test_list.txt"
+    "sub_list": "test_list.txt",
+    "update": true,
+    "output": true
   },
   "update": {
+    "update_list": true,
+    "update_subs": true,
     "post_limit": 100,
     "comment_limit": 1000,
     "lang_use_threshold": 0.1,
@@ -99,15 +104,18 @@
       "columns": [
         {
           "header": "Rang",
-          "value": "{index}"
+          "value": "{index}",
+          "align": "default"
         },
         {
           "header": "Nom",
-          "value": "[/r/{name}](/r/{name})"
+          "value": "[/r/{name}](/r/{name})",
+          "align": "default"
         },
         {
           "header": "Nombre d'abonnés",
-          "value": "{subscriber_count}"
+          "value": "{subscriber_count}",
+          "align": "default"
         }
       ]
     },
@@ -130,23 +138,28 @@
       "columns": [
         {
           "header": "Nom",
-          "value": "[{name}](/r/{name})"
+          "value": "[{name}](/r/{name})",
+          "align": "left"
         },
         {
           "header": "Nombre d'abonnés",
-          "value": "{subscriber_count}"
+          "value": "{subscriber_count}",
+          "align": "center"
         },
         {
           "header": "Statut",
-          "value": "{status}"
+          "value": "{status}",
+          "align": "right"
         },
         {
           "header": "Langue",
-          "value": "{official_lang}"
+          "value": "{official_lang}",
+          "align": "default"
         },
         {
           "header": "PSPLT",
-          "value": "{is_nsfw}"
+          "value": "{is_nsfw}",
+          "align": "default"
         }
       ]
     },
@@ -174,19 +187,23 @@
       "columns": [
         {
           "header": "Nom",
-          "value": "[{name}](/r/{name})"
+          "value": "[{name}](/r/{name})",
+          "align": "default"
         },
         {
           "header": "Nombre d'abonnés",
-          "value": "{subscriber_count}"
+          "value": "{subscriber_count}",
+          "align": "default"
         },
         {
           "header": "Statut",
-          "value": "{status}"
+          "value": "{status}",
+          "align": "default"
         },
         {
           "header": "PSPLT",
-          "value": "{is_nsfw}"
+          "value": "{is_nsfw}",
+          "align": "default"
         }
       ]
     }
